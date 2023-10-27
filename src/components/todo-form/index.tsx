@@ -71,7 +71,7 @@ const TodForm = ({ length, addTodo }: Props) => {
       </Button>
 
       <Modal
-        size={{ base: "sm", sm: "md" }}
+        size={{ base: "xs", sm: "md" }}
         isOpen={isOpen}
         onClose={handleClose}
       >

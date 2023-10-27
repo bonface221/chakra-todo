@@ -57,30 +57,34 @@ function App() {
     }
   };
   return (
-    <Flex justify="center" w="100vw">
-      <Flex w="90vw" h="100vh" justify="center" overflow="hidden">
-        <Stack minW="400px" marginTop="2rem" p="2rem" h="fit-content" gap={8}>
-          <Heading fontSize="5xl" textAlign="center">
-            Todo App
-          </Heading>
-          <Flex gap={3}>
-            <Input
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search"
-              bg={useColorModeValue("gray.200", "gray.700")}
-            />
-            <CategoryMenu current={current} setCurrent={setCurrrent} />
-          </Flex>
-
-          <TodoForm length={todos.length} addTodo={addTodo} />
-          <ListTodos
-            todos={getAllTodos()}
-            deleteTodo={deleteTodo}
-            changeStatus={changeStatus}
+    <Flex w="100vw" h="100vh" justify="center" overflow="hidden">
+      <Stack
+        minW={{ base: "380px", sm: "400px" }}
+        marginTop="2rem"
+        p="2rem"
+        h="fit-content"
+        gap={8}
+      >
+        <Heading fontSize={{ base: "3xl", sm: "5xl" }} textAlign="center">
+          Todo App
+        </Heading>
+        <Flex gap={3}>
+          <Input
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Search"
+            bg={useColorModeValue("gray.200", "gray.700")}
           />
-        </Stack>{" "}
-        <ThemeToggler />
-      </Flex>
+          <CategoryMenu current={current} setCurrent={setCurrrent} />
+        </Flex>
+
+        <TodoForm length={todos.length} addTodo={addTodo} />
+        <ListTodos
+          todos={getAllTodos()}
+          deleteTodo={deleteTodo}
+          changeStatus={changeStatus}
+        />
+      </Stack>{" "}
+      <ThemeToggler />
     </Flex>
   );
 }
