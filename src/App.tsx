@@ -1,4 +1,10 @@
-import { Flex, Heading, Stack } from "@chakra-ui/react";
+import {
+  Flex,
+  Heading,
+  Input,
+  Stack,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import TodoForm from "./components/todo-form";
 import ThemeToggler from "./theme/theme-toggler";
 import ListTodos from "./components/list-todo";
@@ -14,6 +20,7 @@ export interface Todo {
 
 function App() {
   const [current, setCurrrent] = useState<string>("");
+  const [search, setSearch] = useState<string>("");
   const [todos, setTodos] = useState<Todo[]>(
     JSON.parse(localStorage.getItem("todos") || "[]")
   );
@@ -39,7 +46,14 @@ function App() {
     if (current === "") {
       return todos;
     } else {
-      return todos.filter((todo) => todo.category === current);
+      const filteredTodos = todos.filter((todo) => todo.category === current);
+      if (search.length > 0) {
+        return filteredTodos.filter((todo) =>
+          todo.title.toLowerCase().includes(search.toLowerCase())
+        );
+      } else {
+        return filteredTodos;
+      }
     }
   };
   return (
@@ -49,7 +63,15 @@ function App() {
           <Heading fontSize="5xl" textAlign="center">
             Todo App
           </Heading>
-          <CategoryMenu current={current} setCurrent={setCurrrent} />
+          <Flex gap={3}>
+            <Input
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Search"
+              bg={useColorModeValue("gray.200", "gray.700")}
+            />
+            <CategoryMenu current={current} setCurrent={setCurrrent} />
+          </Flex>
+
           <TodoForm length={todos.length} addTodo={addTodo} />
           <ListTodos
             todos={getAllTodos()}
