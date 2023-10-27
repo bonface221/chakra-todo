@@ -70,7 +70,11 @@ const TodForm = ({ length, addTodo }: Props) => {
         Add New Todo
       </Button>
 
-      <Modal isOpen={isOpen} onClose={handleClose}>
+      <Modal
+        size={{ base: "sm", sm: "md" }}
+        isOpen={isOpen}
+        onClose={handleClose}
+      >
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Add Todo Form</ModalHeader>
