@@ -9,8 +9,11 @@ interface Props {
 const CategoryMenu = ({ current, setCurrent }: Props) => {
   return (
     <Menu>
-      <MenuButton as={Button} rightIcon={<MdArrowDropDown />}>
-        {current?.length > 0 ? current : "Category"}
+      <MenuButton>
+        <Button rightIcon={<MdArrowDropDown />}>
+          {" "}
+          {current?.length > 0 ? current : "Category"}
+        </Button>
       </MenuButton>
       <MenuList>
         <MenuItem onClick={() => setCurrent("")}>All</MenuItem>
