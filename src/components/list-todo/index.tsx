@@ -28,6 +28,7 @@ const ListTodos = ({ todos, deleteTodo, changeStatus }: Props) => {
       text: "You won't be able to revert this!",
       icon: "warning",
       showCancelButton: true,
+
       position: "top",
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",

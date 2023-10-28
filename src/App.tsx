@@ -43,17 +43,20 @@ function App() {
   };
 
   const getAllTodos = () => {
-    if (current === "") {
+    if (!!current && !!search) {
       return todos;
     } else {
-      const filteredTodos = todos.filter((todo) => todo.category === current);
-      if (search.length > 0) {
+      let filteredTodos = todos;
+      if (current) {
+        filteredTodos = todos.filter((todo) => todo.category === current);
+      }
+
+      if (search) {
         return filteredTodos.filter((todo) =>
           todo.title.toLowerCase().includes(search.toLowerCase())
         );
-      } else {
-        return filteredTodos;
       }
+      return filteredTodos;
     }
   };
   return (
