@@ -10,6 +10,7 @@ import ThemeToggler from "./theme/theme-toggler";
 import ListTodos from "./components/list-todo";
 import { useState } from "react";
 import CategoryMenu from "./components/category-menu";
+import GithubCTA from "./components/github-cta";
 
 export interface Todo {
   id: number;
@@ -91,6 +92,7 @@ function App() {
         </Stack>{" "}
       </Flex>
       <ThemeToggler />
+      <GithubCTA />
     </>
   );
 }
