@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { Todo } from "../../App";
 import Swal from "sweetalert2";
-import { useRef } from "react";
+import CopyToClipboard from "./components/copy-to-clipboard";
 
 interface Props {
   todos: Todo[];
@@ -19,7 +19,6 @@ interface Props {
 }
 
 const ListTodos = ({ todos, deleteTodo, changeStatus }: Props) => {
-  const copyRef = useRef<HTMLDivElement>(null);
   const color = useColorModeValue("gray.200", "gray.700");
 
   function onDeleteTodo(id: number) {
@@ -28,7 +27,7 @@ const ListTodos = ({ todos, deleteTodo, changeStatus }: Props) => {
       text: "You won't be able to revert this!",
       icon: "warning",
       showCancelButton: true,
-
+      width: "25em",
       position: "top",
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
@@ -39,17 +38,7 @@ const ListTodos = ({ todos, deleteTodo, changeStatus }: Props) => {
       }
     });
   }
-  function onCopy(title: string) {
-    if (!copyRef.current) return;
 
-    copyRef.current.textContent = "copied";
-
-    setTimeout(() => {
-      if (!copyRef.current) return;
-      copyRef.current.textContent = "copy";
-    }, 1000);
-    navigator.clipboard.writeText(title);
-  }
   return (
     <Stack gap={6}>
       {todos.length > 0 ? (
@@ -67,20 +56,7 @@ const ListTodos = ({ todos, deleteTodo, changeStatus }: Props) => {
               <Stack align="start" gap={6}>
                 <Flex align="center" gap={2}>
                   <Text fontSize="xl">{todo.title}</Text>
-                  <Tag
-                    size="sm"
-                    ref={copyRef}
-                    transition="all .3s ease-in-out"
-                    _hover={{
-                      cursor: "pointer",
-                      bg: "teal.400",
-                    }}
-                    onClick={() => onCopy(todo.title)}
-                    bg="teal"
-                    h="fit-content"
-                  >
-                    copy
-                  </Tag>
+                  <CopyToClipboard title={todo.title} />
                 </Flex>
 
                 <Tag colorScheme="yellow">{todo.category}</Tag>
